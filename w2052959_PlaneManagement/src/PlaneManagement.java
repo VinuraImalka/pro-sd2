@@ -7,6 +7,8 @@ public class PlaneManagement {
 
 
     public static void main(String[] args) {
+        seats[1][12] = ' '; seats[1][13] = ' ';
+        seats[2][12] = ' '; seats[2][13] = ' ';
         System.out.println("Welcome to the Plane Management application");
         menu();
 
@@ -83,6 +85,7 @@ public class PlaneManagement {
                     seat(2,"cancel");
                     break;
                 case 3:
+                    first_available_seat();
                     break;
                 case 4:
                     show_seating_plan();
@@ -120,22 +123,6 @@ public class PlaneManagement {
             }
         }catch (RuntimeException error){
             return (conformation());
-        }
-    }
-
-    public static void show_seating_plan(){
-        seats[1][12] = ' '; seats[1][13] = ' ';
-        seats[2][12] = ' '; seats[2][13] = ' ';
-        System.out.println("Seating plan");
-        for(char[] column : seats){
-            for(char row_item : column){
-                if (row_item != 0){
-                    System.out.print(row_item);
-                }else{
-                    System.out.print("O");
-                }
-            }
-            System.out.println();
         }
     }
 
@@ -212,6 +199,37 @@ public class PlaneManagement {
             }
         }catch(RuntimeException error){
             seat(2,"cancel");
+        }
+    }
+
+    public static void first_available_seat(){
+        for(int column_index = 0;column_index < seats.length; column_index++){
+            for(int row_index =0; row_index < seats[column_index].length;row_index++){
+                char column_letter = 'A';
+                switch (column_index) {
+                    case 'B' -> column_letter = 'B';
+                    case 'C' -> column_letter = 'C';
+                    case 'D' -> column_letter = 'D';
+                }
+                if (seats[column_index][row_index] == 0){
+                    System.out.println("The first seat available for purchase is seat "+column_letter+""+(row_index+1));
+                    menu();
+                }
+            }
+        }
+    }
+
+    public static void show_seating_plan(){
+        System.out.println("Seating plan");
+        for(char[] column : seats){
+            for(char row_item : column){
+                if (row_item != 0){
+                    System.out.print(row_item);
+                }else{
+                    System.out.print("O");
+                }
+            }
+            System.out.println();
         }
     }
 }
