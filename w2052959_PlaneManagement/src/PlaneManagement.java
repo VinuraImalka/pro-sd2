@@ -103,7 +103,7 @@ public class PlaneManagement {
     }
 
     public static boolean conformation(){
-        System.out.println("Please select y for yes ,n for no:");
+        System.out.println("Please enter y for yes ,n for no:");
         Scanner input = new Scanner(System.in);
         String user_input = input.nextLine();
         try{
